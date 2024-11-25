@@ -7,6 +7,6 @@ module com.example.pocketimpirium {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 
-    opens com.example.pocketimpirium to javafx.fxml;
-    exports com.example.pocketimpirium;
+    exports com.example.pocketimpirium.ui;
+    opens com.example.pocketimpirium.ui to javafx.fxml;
 }

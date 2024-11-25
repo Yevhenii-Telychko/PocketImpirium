@@ -1,4 +1,4 @@
-package com.example.pocketimpirium;
+package com.example.pocketimpirium.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

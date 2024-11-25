@@ -1,4 +1,4 @@
-package com.example.pocketimpirium;
+package com.example.pocketimpirium.ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
