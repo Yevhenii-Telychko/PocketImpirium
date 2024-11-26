@@ -3,28 +3,28 @@ package com.example.pocketimpirium.game;
 import java.util.List;
 
 public class Sector {
-    private int level;
-    private List<Hex> hexes;
-    private boolean isTriprime;
+    private final int id;
+    private final List<Hex> hexes;
+    private final boolean isTriPrime;
     private boolean isScored;
 
-    public Sector(int level, List<Hex> hexes, boolean isTriprime, boolean isScored) {
-        this.level = level;
+    public Sector(int id, List<Hex> hexes, boolean isTriPrime) {
+        this.id = id;
         this.hexes = hexes;
-        this.isTriprime = isTriprime;
-        this.isScored = isScored;
+        this.isTriPrime = isTriPrime;
+        resetIsScored();
     }
 
-    public int getLevel() {
-        return level;
+    public int getId() {
+        return id;
     }
 
     public List<Hex> getHexes() {
         return hexes;
     }
 
-    private boolean getIsTriprime() {
-        return isTriprime;
+    public boolean getIsTriPrime() {
+        return isTriPrime;
     }
 
     private boolean getIsScored() {
@@ -43,6 +43,14 @@ public class Sector {
 
     public Sector chooseSectorToScore() {
         return null;
+    }
+
+    public String toString() {
+        StringBuilder hexesString = new StringBuilder();
+        for (Hex hex : hexes) {
+            hexesString.append("\n  ").append(hex);
+        }
+        return "Sector " + id + "\nHexes:["+hexesString+"\n]" + "\nTriprime: " + isTriPrime;
     }
 
 }

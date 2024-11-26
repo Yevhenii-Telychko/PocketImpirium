@@ -1,7 +1,7 @@
 package com.example.pocketimpirium.game;
 
 public class Ship {
-    private Player owner;
+    private final Player owner;
 
     public Ship(Player owner) {
         this.owner = owner;

@@ -1,29 +1,21 @@
 package com.example.pocketimpirium.game;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Hex {
-    private int x;
-    private int y;
-    private SystemLevel systemLevel;
+    private final int id;
+    private final SystemLevel systemLevel;
     private Sector sector;
     private List<Fleet> fleets;
 
-    public Hex(int x, int y, SystemLevel systemLevel, Sector sector, List<Fleet> fleets) {
-        this.x = x;
-        this.y = y;
+    public Hex(int id, SystemLevel systemLevel, Sector sector) {
+        this.id = id;
         this.systemLevel = systemLevel;
         this.sector = sector;
-        this.fleets = fleets != null ? fleets : new ArrayList<Fleet>();
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public int getId() {
+        return id;
     }
 
     public SystemLevel getSystemLevel() {
@@ -38,12 +30,8 @@ public class Hex {
         return fleets;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
+    public void setSector(Sector sector) {
+        this.sector = sector;
     }
 
     public void addFleet(Fleet fleet) {
@@ -54,5 +42,9 @@ public class Hex {
 
     public boolean isControlledByPlayer(Player player) {
         return false;
+    }
+
+    public String toString() {
+        return "ID: " + id + " System Level: " + systemLevel;
     }
 }
