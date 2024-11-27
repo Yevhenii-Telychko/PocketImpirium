@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HexGenerator {
-    // hexId as a key to get the exact hex
+    // hexId have the form {idOfSectoridOfhex}
     private int hexId;
 
     public HexGenerator() {
-        this.hexId = 0;
+        this.hexId = 10;
     }
 
     public List<Hex> generateHexes(int numberOfHexes, Sector sector) {
@@ -23,19 +23,35 @@ public class HexGenerator {
             for (int i = hexId; i < hexId + numberOfHexes; i++) {
                 hexes.add(new Hex(i, SystemLevel.LEVEL_3, sector));
             }
-            hexId = hexId + numberOfHexes;
-            return hexes;
+        } else {
+            HashMap<Integer, SystemLevel> systemPlanet = generateSystemPlanet(numberOfHexes);
+
+            // Generation of hexes
+            for (int i = hexId; i < hexId + numberOfHexes; i++) {
+                hexes.add(new Hex(i, systemPlanet.getOrDefault(i, SystemLevel.LEVEL_0), sector));
+            }
         }
 
+        hexId = modifyHexId(sector.getId());
+        return hexes;
+    }
 
-        // Generate Random ids for the system levels planet
+    // Generate Random ids for the system levels planet
+    public List<Integer> generateIdForSysLevel(int numberOfHexes) {
         List<Integer> idOfSystemLevel = new ArrayList<>();
+
         for (int i = hexId; i < hexId + numberOfHexes; i++) {
             idOfSystemLevel.add(i);
         }
 
         Collections.shuffle(idOfSystemLevel);
         idOfSystemLevel = idOfSystemLevel.subList(0, 3);
+
+        return idOfSystemLevel;
+    }
+
+    public HashMap<Integer, SystemLevel> generateSystemPlanet(int numberOfHexes) {
+        List<Integer> idOfSystemLevel = generateIdForSysLevel(numberOfHexes);
 
         // Create a list of levels
         List<SystemLevel> levels = new ArrayList<>();
@@ -51,11 +67,10 @@ public class HexGenerator {
             systemLevelsPlanet.put(idOfSystemLevel.get(i), levels.get(i));
         }
 
-        // Generation of hexes
-        for (int i = hexId; i < hexId + numberOfHexes; i++) {
-            hexes.add(new Hex(i, systemLevelsPlanet.getOrDefault(i, SystemLevel.LEVEL_0), sector));
-        }
-        hexId = hexId + numberOfHexes;
-        return hexes;
+        return systemLevelsPlanet;
+    }
+
+    public int modifyHexId(int sectorId) {
+        return 10 * (sectorId + 2);
     }
 }
