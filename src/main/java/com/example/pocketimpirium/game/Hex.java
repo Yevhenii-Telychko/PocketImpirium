@@ -5,11 +5,17 @@ import java.util.List;
 public class Hex {
     private final int id;
     private final SystemLevel systemLevel;
-    private Sector sector;
+    private final int x;
+    private final int y;
+    private String type;
+    private final Sector sector;
     private List<Fleet> fleets;
 
-    public Hex(int id, SystemLevel systemLevel, Sector sector) {
+    public Hex(int id, int x, int y, SystemLevel systemLevel, Sector sector) {
         this.id = id;
+        this.x = x;
+        this.y = y;
+        this.type = x == 0 && y == 0 ? "Central" : "Side";
         this.systemLevel = systemLevel;
         this.sector = sector;
     }
@@ -26,13 +32,7 @@ public class Hex {
         return sector;
     }
 
-    public List<Fleet> getFleets() {
-        return fleets;
-    }
-
-    public void setSector(Sector sector) {
-        this.sector = sector;
-    }
+    public void setType(String type) {this.type = type;}
 
     public void addFleet(Fleet fleet) {
     }
@@ -45,6 +45,6 @@ public class Hex {
     }
 
     public String toString() {
-        return "ID: " + id + " System Level: " + systemLevel;
+        return "ID: " + id + " x: " + x + " y: " + y + " type: " + type + " System Level: " + systemLevel;
     }
 }

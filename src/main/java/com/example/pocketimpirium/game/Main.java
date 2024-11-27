@@ -13,19 +13,19 @@ public class Main {
         gameMap.initialize();
 
         List<Sector> sectors = gameMap.getSectors();
-        Map<Hex, List<Hex>> hexesGraph = gameMap.getHexesGraph();
+//        Map<Hex, List<Hex>> hexesGraph = gameMap.getHexesGraph();
 
-//        for(Sector sector : sectors){
-//            System.out.println(sector);
-//        }
-
-        for(Hex node: hexesGraph.keySet()){
-            System.out.print(node.getId() + ": ");
-            for(Hex neighbor: hexesGraph.get(node)){
-                System.out.print(neighbor.getId() + ", ");
-            }
-            System.out.println();
+        for(Sector sector : sectors){
+            System.out.println(sector);
         }
+
+//        for(Hex node: hexesGraph.keySet()){
+//            System.out.print(node.getId() + ": ");
+//            for(Hex neighbor: hexesGraph.get(node)){
+//                System.out.print(neighbor.getId() + ", ");
+//            }
+//            System.out.println();
+//        }
 
     }
 
