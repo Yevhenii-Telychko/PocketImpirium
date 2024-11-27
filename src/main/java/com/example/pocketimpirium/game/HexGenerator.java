@@ -7,15 +7,15 @@ import java.util.List;
 
 public class HexGenerator {
     // hexId have the form {idOfSectoridOfhex}
-    private int hexId;
+    private int hexId = 10;
 
     public HexGenerator() {
-        this.hexId = 10;
+
     }
 
     public List<Hex> generateHexes(int numberOfHexes, Sector sector) {
         // List of hexes in one sector
-        ArrayList<Hex> hexes = new ArrayList<Hex>();
+        ArrayList<Hex> hexes = new ArrayList<>();
 
         // Set to all hexes LEVEL_3 if TriPrime
         if (sector.getIsTriPrime()) {
@@ -71,6 +71,6 @@ public class HexGenerator {
     }
 
     public int modifyHexId(int sectorId) {
-        return 10 * (sectorId + 2);
+        return 10 * (sectorId + 1);
     }
 }
