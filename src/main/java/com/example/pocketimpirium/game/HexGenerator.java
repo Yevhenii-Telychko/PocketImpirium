@@ -21,7 +21,11 @@ public class HexGenerator {
         //Id for tracking coordinates for particular hex
         int coorId = 0;
         // Getting transformed Hexes coor according to the side of the sector
-        int[][] transformedHexesCoor = coordinatePlane.transformHexesCoorInSector(sector.getSide());
+        int[][] transformedHexesCoor = coordinatePlane.getTransformedHexesCoordinates("CENTRAL");
+        for (String side : sector.getSideAsList()){
+            transformedHexesCoor = coordinatePlane.getTransformedHexesCoordinates(side, transformedHexesCoor);
+        }
+
         // Set to all hexes LEVEL_3 if TriPrime
         if (sector.getIsTriPrime()) {
             // Generation of hexes

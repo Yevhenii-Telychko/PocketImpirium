@@ -1,5 +1,6 @@
 package com.example.pocketimpirium.game;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +26,13 @@ public class Sector {
 
     public String getSide() {
         return side;
+    }
+
+    public List<String> getSideAsArray(){
+        return List.of(side.split(" "));
+    }
+    public List<String> getSideAsList() {
+        return Arrays.asList(side.split(" "));
     }
 
     public List<Hex> getHexes() {

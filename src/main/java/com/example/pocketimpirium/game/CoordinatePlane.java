@@ -35,12 +35,19 @@ public class CoordinatePlane {
     }
 
 
-    public int[][] transformHexesCoorInSector(String side) {
+    public int[][] transformHexesCoorInSector(String side, int[][]hexesCoordinates){
         Function<int[], int[]> transformationFunction = this.tranformationFunctions.get(side);
-        int[][] transformedHexesCoor = new int[basisHexesCoordinates.length][basisHexesCoordinates[0].length];
-        for (int i = 0; i < basisHexesCoordinates.length; i++) {
-            transformedHexesCoor[i] = transformationFunction.apply(basisHexesCoordinates[i]);
+        int[][] transformedHexesCoor = new int[hexesCoordinates.length][hexesCoordinates[0].length];
+        for (int i = 0; i < hexesCoordinates.length; i++) {
+            transformedHexesCoor[i] = transformationFunction.apply(hexesCoordinates[i]);
         }
         return transformedHexesCoor;
+    }
+
+    public int[][] getTransformedHexesCoordinates(String side){
+        return transformHexesCoorInSector(side, this.basisHexesCoordinates);
+    }
+    public int[][] getTransformedHexesCoordinates(String side, int[][]hexesCoordinates) {
+        return transformHexesCoorInSector(side, hexesCoordinates);
     }
 }

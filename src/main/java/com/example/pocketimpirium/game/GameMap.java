@@ -7,23 +7,32 @@ public class GameMap {
     private final CoordinatePlane plane = new CoordinatePlane();
     private final HexGenerator hexGenerator = new HexGenerator(plane);
     private HexesGraph hexesGraph;
-    private final int numberOfSectors;
+    private List<List<String>> configuration = new ArrayList<>();
+//    private final int numberOfSectors;
 
-    public GameMap(int numberOfSectors) {
-        this.numberOfSectors = numberOfSectors;
+    public GameMap(List<List<String>> configuration) {
+        this.configuration = configuration;
     }
 
     public void generateSideSectors() {
         // Generating Sectors
-        String[] sides = {"CENTRAL", "NE", "E", "SE", "SW", "W", "NW"};
-        for (int i = 0; i < numberOfSectors; i++) {
-            Sector sector = new Sector(i+1, new ArrayList<>(), sides[i]);
-            hexGenerator.generateHexes(7, sector);
-            List<Hex> hexes = hexGenerator.getHexes();
-            sector.getHexes().addAll(hexes);
-            Hex centralHex = sector.getHexes().getFirst();
-            centralHex.setType("CENTRAL");
-            sectors.add(sector);
+//        String[] sides = {"CENTRAL", "NE", "E", "SE", "SW", "W", "NW"};
+        int sectorID = 0;
+        for (List<String> sides : configuration) {
+            String sectorName = "";
+            System.out.println(sides);
+            for(String side : sides) {
+                sectorID += 1;
+                sectorName += side + " ";
+                Sector sector = new Sector(sectorID, new ArrayList<>(), sectorName);
+                hexGenerator.generateHexes(7, sector);
+                List<Hex> hexes = hexGenerator.getHexes();
+                sector.getHexes().addAll(hexes);
+                Hex centralHex = sector.getHexes().getFirst();
+                centralHex.setType("CENTRAL");
+                sectors.add(sector);
+            }
+
         }
     }
 
