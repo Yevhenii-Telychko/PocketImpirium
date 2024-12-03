@@ -10,13 +10,13 @@ public class CoordinatePlane {
             {0, 0}, {0, -1}, {1, -1}, {1, 0}, {0, 1}, {-1, 1}, {-1, 0}
     };
 
-    private final Map<String, Function<int[], int[]>> tranformationFunctions = new HashMap<>();
+    private final Map<String, Function<int[], int[]>> transformationFunctions = new HashMap<>();
 
     public CoordinatePlane() {
-        this.setTranformationFunctions();
+        this.setTransformationFunctions();
     }
 
-    public void setTranformationFunctions() {
+    private void setTransformationFunctions() {
         Function<int[], int[]> CENTRAL = (vector) -> vector;
         Function<int[], int[]> NE = (vector) -> new int[]{vector[0] + 2, vector[1] - 3};
         Function<int[], int[]> E = (vector) -> new int[]{vector[0] + 3, vector[1] - 1};
@@ -25,18 +25,18 @@ public class CoordinatePlane {
         Function<int[], int[]> W = (vector) -> new int[]{vector[0] - 3, vector[1] + 1};
         Function<int[], int[]> NW = (vector) -> new int[]{vector[0] - 1, vector[1] - 2};
 
-        this.tranformationFunctions.put("CENTRAL", CENTRAL);
-        this.tranformationFunctions.put("NE", NE);
-        this.tranformationFunctions.put("E", E);
-        this.tranformationFunctions.put("SE", SE);
-        this.tranformationFunctions.put("SW", SW);
-        this.tranformationFunctions.put("W", W);
-        this.tranformationFunctions.put("NW", NW);
+        this.transformationFunctions.put("CENTRAL", CENTRAL);
+        this.transformationFunctions.put("NE", NE);
+        this.transformationFunctions.put("E", E);
+        this.transformationFunctions.put("SE", SE);
+        this.transformationFunctions.put("SW", SW);
+        this.transformationFunctions.put("W", W);
+        this.transformationFunctions.put("NW", NW);
     }
 
-
-    public int[][] transformHexesCoorInSector(String side, int[][]hexesCoordinates){
-        Function<int[], int[]> transformationFunction = this.tranformationFunctions.get(side);
+    // Transforming the hexes according to the side
+    private int[][] transformHexesCoorInSector(String side, int[][]hexesCoordinates){
+        Function<int[], int[]> transformationFunction = this.transformationFunctions.get(side);
         int[][] transformedHexesCoor = new int[hexesCoordinates.length][hexesCoordinates[0].length];
         for (int i = 0; i < hexesCoordinates.length; i++) {
             transformedHexesCoor[i] = transformationFunction.apply(hexesCoordinates[i]);

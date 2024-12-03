@@ -1,14 +1,15 @@
 package com.example.pocketimpirium.game;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 public class Hex {
     private final int id;
     private final SystemLevel systemLevel;
     private final int x;
     private final int y;
-    private String type;
     private final Sector sector;
+    private String type;
     private List<Fleet> fleets;
 
     public Hex(int id, int x, int y, SystemLevel systemLevel, Sector sector) {
@@ -31,6 +32,7 @@ public class Hex {
     public int getY() {
         return y;
     }
+
     public SystemLevel getSystemLevel() {
         return systemLevel;
     }
@@ -39,7 +41,9 @@ public class Hex {
         return sector;
     }
 
-    public void setType(String type) {this.type = type;}
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public void addFleet(Fleet fleet) {
     }
@@ -55,8 +59,15 @@ public class Hex {
         return Objects.hash(id);
     }
 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hex hex = (Hex) o;
+        return id == hex.id;
+    }
+
     public String toString() {
 //        return "ID: " + id;
-        return  id + ":{ \"x\": " + x + ", \"y\": " + y +"},";
+        return id + ":{ \"x\": " + x + ", \"y\": " + y + "},";
     }
 }

@@ -32,10 +32,6 @@ public class GameMap {
         }
     }
 
-    public Map<Hex, List<Hex>> getHexesGraph() {
-        return hexesGraph.getHexesGraph();
-    }
-
     public List<Sector> getSectors() {
         return sectors;
     }
@@ -43,6 +39,10 @@ public class GameMap {
     public void initialize(){
         this.generateSideSectors();
         this.hexesGraph = new HexesGraph(sectors);
+    }
+
+    public HexesGraph getGraph() {
+        return hexesGraph;
     }
 
 }

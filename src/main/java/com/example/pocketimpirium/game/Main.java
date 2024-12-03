@@ -20,15 +20,22 @@ public class Main {
         gameMap.initialize();
 
         List<Sector> sectors = gameMap.getSectors();
-        Map<Hex, List<Hex>> hexesGraph = gameMap.getHexesGraph();
+        Map<Hex, List<Hex>> hexesGraph = gameMap.getGraph().getHexesGraph();
 
-        for(Sector sector : sectors){
-            System.out.println(sector);
-        }
+//        for(Sector sector : sectors){
+//            System.out.println(sector);
+//        }
 
-        for(Hex hex : hexesGraph.keySet()){
-            System.out.println(hex + ":" + hexesGraph.get(hex));
-        }
+//        for(Hex hex : hexesGraph.keySet()){
+//            System.out.println(hex + ":" + hexesGraph.get(hex));
+//        }
+
+        Hex hex1 = sectors.getFirst().getHexes().getFirst();
+        Hex hex2 = sectors.get(1).getHexes().get(1);
+        System.out.println(hex1);
+        System.out.println(hex2);
+        int moves = gameMap.getGraph().getMoveCount(hex1, hex2);
+        System.out.println(moves);
 
     }
 

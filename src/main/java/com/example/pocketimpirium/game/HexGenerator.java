@@ -1,11 +1,14 @@
 package com.example.pocketimpirium.game;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class HexGenerator {
-    // hexId have the form {idOfSectoridOfhex}
-    private int hexId = 10;
     private final CoordinatePlane coordinatePlane;
+    // hexId have the form {idOfSectorIdOfHex}
+    private int hexId = 10;
     private List<Hex> hexes;
 
     public HexGenerator(CoordinatePlane coordinatePlane) {
@@ -18,37 +21,39 @@ public class HexGenerator {
 
     public void generateHexes(int numberOfHexes, Sector sector) {
         this.hexes = new ArrayList<>();
-        //Id for tracking coordinates for particular hex
-        int coorId = 0;
+
         // Getting transformed Hexes coor according to the side of the sector
         int[][] transformedHexesCoor = coordinatePlane.getTransformedHexesCoordinates("CENTRAL");
-        for (String side : sector.getSideAsList()){
+        for (String side : sector.getSideAsList()) {
             transformedHexesCoor = coordinatePlane.getTransformedHexesCoordinates(side, transformedHexesCoor);
         }
+
+        //id for tracking coordinates for particular hex
+        int coorId = 0;
+        int[] hexCoor = transformedHexesCoor[coorId];
 
         // Set to all hexes LEVEL_3 if TriPrime
         if (sector.getIsTriPrime()) {
             // Generation of hexes
             for (int i = hexId; i < hexId + numberOfHexes; i++) {
-                int[] hexCoor = transformedHexesCoor[coorId];
                 hexes.add(new Hex(i, hexCoor[0], hexCoor[1], SystemLevel.LEVEL_3, sector));
                 coorId++;
             }
         } else {
+            //Ids of system level
             HashMap<Integer, SystemLevel> systemPlanet = generateSystemPlanet(numberOfHexes);
+
             // Generation of hexes
             for (int i = hexId; i < hexId + numberOfHexes; i++) {
-                int[] hexCoor = transformedHexesCoor[coorId];
                 hexes.add(new Hex(i, hexCoor[0], hexCoor[1], systemPlanet.getOrDefault(i, SystemLevel.LEVEL_0), sector));
                 coorId++;
             }
         }
-
         hexId = modifyHexId(sector.getId());
     }
 
     // Generate Random ids for the system levels planet
-    public List<Integer> generateIdForSysLevel(int numberOfHexes) {
+    private List<Integer> generateIdForSysLevel(int numberOfHexes) {
         List<Integer> idOfSystemLevel = new ArrayList<>();
 
         for (int i = hexId; i < hexId + numberOfHexes; i++) {
@@ -61,7 +66,7 @@ public class HexGenerator {
         return idOfSystemLevel;
     }
 
-    public HashMap<Integer, SystemLevel> generateSystemPlanet(int numberOfHexes) {
+    private HashMap<Integer, SystemLevel> generateSystemPlanet(int numberOfHexes) {
         List<Integer> idOfSystemLevel = generateIdForSysLevel(numberOfHexes);
 
         // Create a list of levels
@@ -81,7 +86,7 @@ public class HexGenerator {
         return systemLevelsPlanet;
     }
 
-    public int modifyHexId(int sectorId) {
+    private int modifyHexId(int sectorId) {
         return 10 * (sectorId + 1);
     }
 }
