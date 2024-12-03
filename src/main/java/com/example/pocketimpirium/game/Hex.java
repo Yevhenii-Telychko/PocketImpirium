@@ -1,6 +1,6 @@
 package com.example.pocketimpirium.game;
 
-import java.util.List;
+import java.util.*;
 
 public class Hex {
     private final int id;
@@ -24,6 +24,13 @@ public class Hex {
         return id;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
     public SystemLevel getSystemLevel() {
         return systemLevel;
     }
@@ -44,7 +51,12 @@ public class Hex {
         return false;
     }
 
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     public String toString() {
-        return "ID: " + id + " x: " + x + " y: " + y + " type: " + type + " System Level: " + systemLevel;
+//        return "ID: " + id;
+        return  id + ":{ \"x\": " + x + ", \"y\": " + y +"},";
     }
 }

@@ -9,8 +9,8 @@ public class Main {
 
         List<List<String>> configuration = Arrays.asList(
                 List.of("CENTRAL"),
-                List.of("NE", "NE"),
-                List.of("E", "SE"),
+                List.of("NE"),
+                List.of("E"),
                 List.of("SE"),
                 List.of("SW"),
                 List.of("W"),
@@ -20,21 +20,15 @@ public class Main {
         gameMap.initialize();
 
         List<Sector> sectors = gameMap.getSectors();
-//        Map<Hex, List<Hex>> hexesGraph = gameMap.getHexesGraph();
+        Map<Hex, List<Hex>> hexesGraph = gameMap.getHexesGraph();
 
         for(Sector sector : sectors){
             System.out.println(sector);
         }
-//
-//        String side = "NE ";
-//        System.out.println(Arrays.toString(side.split(" ")));
-//        for(Hex node: hexesGraph.keySet()){
-//            System.out.print(node.getId() + ": ");
-//            for(Hex neighbor: hexesGraph.get(node)){
-//                System.out.print(neighbor.getId() + ", ");
-//            }
-//            System.out.println();
-//        }
+
+        for(Hex hex : hexesGraph.keySet()){
+            System.out.println(hex + ":" + hexesGraph.get(hex));
+        }
 
     }
 

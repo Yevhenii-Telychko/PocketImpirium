@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Sector {
     private final int id;
-    private final List<Hex> hexes;
+    private List<Hex> hexes;
     private final boolean isTriPrime;
     private final String side;
     private boolean isScored;
@@ -28,9 +28,6 @@ public class Sector {
         return side;
     }
 
-    public List<String> getSideAsArray(){
-        return List.of(side.split(" "));
-    }
     public List<String> getSideAsList() {
         return Arrays.asList(side.split(" "));
     }
@@ -39,6 +36,9 @@ public class Sector {
         return hexes;
     }
 
+    public void setHexes(List<Hex> hexes) {
+        this.hexes = hexes;
+    }
     public boolean getIsTriPrime() {
         return isTriPrime;
     }
@@ -66,7 +66,8 @@ public class Sector {
         for (Hex hex : hexes) {
             hexesString.append("\n  ").append(hex);
         }
-        return "Sector " + id + " Side: " + side + "\nHexes:[" + hexesString + "\n]" + "\nTriprime: " + isTriPrime;
+//        return " Sector " + id + " Side: " + side + "\nHexes:[" + hexesString + "\n]" + "\nTriprime: " + isTriPrime;
+        return " \"Sector " + id + "\":" + "\n{" + hexesString + "\n},";
     }
 
 }
